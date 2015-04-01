@@ -1,0 +1,19 @@
+{
+  "name": "ToDoApp",
+  "version": "1.0.0",
+  "description": "ToDo App - Scotch.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MastaWu/todo-scotch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MastaWu/todo-scotch/issues"
+  },
+  "homepage": "https://github.com/MastaWu/todo-scotch"
+}
