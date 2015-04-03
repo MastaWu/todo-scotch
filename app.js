@@ -2,7 +2,7 @@
 
 var TodoApp = angular.module('TodoApp', []);
 
-TodoApp.controller('todoController', function($scope, $http){
+function todoController($scope, $http) {
 
     $scope.formData = {};
 
@@ -30,7 +30,7 @@ TodoApp.controller('todoController', function($scope, $http){
                 $scope.formData = {};
                 $scope.todos = data;
 
-                console.log(Data);
+                console.log(data);
 
             })
 
@@ -61,4 +61,4 @@ TodoApp.controller('todoController', function($scope, $http){
 
     };
 
-});
+}

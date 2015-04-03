@@ -18,7 +18,7 @@ var express             = require('express'),                                //c
 //============ Server configuration ============//
 
 
-mongoose.connect(connection); //connect to database
+mongoose.connect('mongodb://admin:pass@proximus.modulusmongo.net:27017/iq5eBesu'); //connect to database
 
 app.use(express.static(__dirname + '/public'));                              //set the static files location /public/
 
@@ -32,9 +32,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));              //p
 
 app.use(methodOverride());
 
-app.get('/', function(req, res){
+app.get('', function(req, res){
 
    res.sendfile('index.html');
+
+});
+
+app.get('/app.js', function(req, res){
+
+    res.sendfile('app.js');
 
 });
 
@@ -72,29 +78,24 @@ app.get('/api/todos', function(req, res){                             //Retrievi
 
 });
 
-app.post('api/todos', function(req, res){                           //Posting data to mongo, then retrieving all
+//Posting data to mongo, then retrieving all
 
-    Todo.create({                                                   //Add post and send it to mongo
+app.post('/api/todos', function(req, res) {
 
-        text: req.body.text,
-        done: false
-
-    }, function(err){
-
-        if(err){
+    // create a todo, information comes from AJAX request from Angular
+    Todo.create({
+        text : req.body.text,
+        done : false
+    }, function(err, todo) {
+        if (err)
             res.send(err);
-        }
 
-    });
-
-    Todo.find(function(err, todos){                                 //after posting, retrieve all todo
-
-        if(err){
-            res.send(err);
-        } else{
+        // get and return all the todos after you create another
+        Todo.find(function(err, todos) {
+            if (err)
+                res.send(err)
             res.json(todos);
-        }
-
+        });
     });
 
 });
