@@ -1,3 +1,6 @@
+//route.js
+/* Determines what happens when certain actions are invoked. When you press a button, your button invokes a function and sends you to a specific page */
+
 var Todo = require('./models/todoModel.js');
 
 module.exports = function(app){
@@ -66,11 +69,5 @@ module.exports = function(app){
         res.sendfile('index.html');
 
     });
-
- /*   app.get('/app.js', function(req, res){
-
-        res.sendfile('app.js');
-
-    });*/
 
 }

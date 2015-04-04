@@ -1,4 +1,5 @@
 //app.js
+/* Angular module defines functions and attaching functions to scope */
 
 var TodoApp = angular.module('TodoApp', []);
 

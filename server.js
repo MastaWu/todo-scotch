@@ -1,5 +1,5 @@
 //server.js
-
+/* Sets up server. Meaning, when you first access the page, this page is invoked. It responds with the specific html page to return, and also all the dependencies that the server will need to process the data (ex. data from database and database connection) */
 
 //Instantiate dependencies
 var express             = require('express'),                                //create app with express
