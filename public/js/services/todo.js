@@ -12,7 +12,7 @@ angular.module('todoService', [])
                 return $http.get('api/todos');
             },
 
-            create: function(){
+            create: function(todoData){
                 return $http.post('api/todos', todoData);
             },
 
