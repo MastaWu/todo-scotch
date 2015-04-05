@@ -3,10 +3,10 @@
 
 var Todo = require('./models/todoModel.js');
 
-module.exports = function(app){
+module.exports = function(app, passport){
 
 
-    app.get('/api/todos', function(req, res){                             //Retrieving all items from mongo
+    /*app.get('/api/todos', function(req, res){                             //Retrieving all items from mongo
 
         Todo.find(function(err, todos){
 
@@ -68,6 +68,56 @@ module.exports = function(app){
 
         res.sendfile('./public/index.html');
 
+    });*/
+
+    app.get('/', function(req, res){
+
+        res.render('index.ejs');
+
     });
+
+    app.get('/login', function(req, res){
+
+        res.render('login.ejs', {message: req.flash('loginMessage')});
+
+    });
+
+    app.get('/signup', function(req, res){
+
+        res.render('signup.ejs', {message: req.flash('signupMessage')});
+
+    });
+
+    app.get('/profile', isLoggedIn, function(req, res){
+
+        res.render('profile.ejs', {
+
+            user: req.user
+
+        });
+
+    });
+
+    app.get('logout', function(req, res){
+
+        req.logout();
+        res.redirect('/');
+
+    });
+
+}
+
+function isLoggedIn(req, res, next){
+
+    if(req.isAuthenticated()){
+
+        return next;
+
+    } else{
+
+        res.redirect('/');
+
+    }
+
 
 }

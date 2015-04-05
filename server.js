@@ -8,8 +8,11 @@ var express             = require('express'),                                //c
     mongoose            = require('mongoose'),                               //requires mongoose
     bodyParser          = require('body-parser'),                            //pull data from html POST
     methodOverride      = require('method-override'),                        //simulate DELETE and PUT
-    database            = require('./configs/database.js');                     //db url connection
-
+    database            = require('./configs/database.js'),                  //db url connection
+    passport            = require('passport'),
+    flash               = require('connect-flash'),
+    cookieParser        = require('cookie-parser'),
+    session             = require('express-session');
 
 //============ Server configuration ============//
 
@@ -19,6 +22,16 @@ mongoose.connect(database.url); //connect to database
 app.use(express.static(__dirname + '/public'));                              //set the static files location /public/
 
 app.use(morgan('dev'));                                                      //log every request to console
+
+app.use(cookieParser());
+
+app.use(session({secret: 'secret'}));
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+app.use(flash());
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));                        //parse application/x-www-form-urlencoded
 
@@ -30,10 +43,9 @@ app.use(methodOverride());
 
 //============ Routes ============//
 
-require('./apps/routes.js')(app);
+require('./apps/routes.js')(app, passport);
 
 //============ Listening for connection ============//
-
 
 app.listen(8000);
 console.log("You are now listening to port: 8000");
