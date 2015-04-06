@@ -19,7 +19,7 @@ var express             = require('express'),                                //c
 
 mongoose.connect(database.url); //connect to database
 
-app.use(express.static(__dirname + '/public'));                              //set the static files location /public/
+app.use(express.static(__dirname + '/public/'));                              //set the static files location /public/
 
 app.use(morgan('dev'));                                                      //log every request to console
 
@@ -30,6 +30,8 @@ app.use(session({secret: 'secret'}));
 app.use(passport.initialize());
 
 app.use(passport.session());
+
+app.set('view engine', 'ejs');
 
 app.use(flash());
 
@@ -44,6 +46,7 @@ app.use(methodOverride());
 //============ Routes ============//
 
 require('./apps/routes.js')(app, passport);
+require('./configs/passport.js')(passport);
 
 //============ Listening for connection ============//
 
